@@ -18,7 +18,13 @@ with st.sidebar:
         "ติดต่อ\nFacebook: Wittawat Kitipatthavorn\nTel: 086-398-1093\nLine: wittawat_earth"
     )
 with st.container():
+    st.header("Termdai Data Collection 📁")
     st.header("ระบบเปิดรับชุดข้อมูลแบบทดสอบเพลงไทยเดิม 🎤")
+    st.write("")
+    st.subheader("ข้อพึงปฎิบัติ*")
+    st.write("1.เมื่อบันทึกเสียงเสร็จสิ้นให้ผู้บันทึกทำการตรวจไฟล์เสียงที่บันทึกที่หน้า Dashboard ก่อนทำการบันทึกในครั้งถัดไป")
+    st.write("2.หากตรวจพบเจอ Bug & Error สามารถแจ้งได้ที่หน้า Report")
+    st.write("")
     data_check = f"./audio/"
     count = {}
     for audio in os.listdir(data_check):
@@ -28,9 +34,11 @@ with st.container():
                 os.path.join(data_check, audio, audio_ex)
             ):
                 count[audio_ex] = len(files)
-                st.write(f'ต้องการเสียง "{audio_ex}" อีก {100 - len(files)} เสียง')
+                st.write(
+                    f'ต้องการเสียง "{audio_ex}" อีก {100 - len(files)} เสียง')
     st.write("")
-    type = st.selectbox("หัวข้อแบบฝึกหัด", ["การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
+    type = st.selectbox("หัวข้อแบบฝึกหัด", [
+                        "การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
     if type == "การเปล่งเสียงกลุ่มคำ":
         list_1 = st.selectbox("เลือกเสียง", ["เออ", "อี"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
@@ -46,10 +54,12 @@ with st.container():
                 os.makedirs(path)
             for root_dir, cur_dir, files in os.walk(path):
                 count += len(files)
-            wav_file = open(f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
+            wav_file = open(
+                f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
             wav_file.write(audio.tobytes())
     if type == "กลวิธีขับร้อง":
-        list_1 = st.selectbox("เลือกกลวิธีขับร้อง", ["การกลิ้งเสียง", "การเกลือกเสียง"])
+        list_1 = st.selectbox("เลือกกลวิธีขับร้อง", [
+                              "การกลิ้งเสียง", "การเกลือกเสียง"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
         if len(audio) > 0:
             # To play audio in frontend:
@@ -63,5 +73,6 @@ with st.container():
                 os.makedirs(path)
             for root_dir, cur_dir, files in os.walk(path):
                 count += len(files)
-            wav_file = open(f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
+            wav_file = open(
+                f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
             wav_file.write(audio.tobytes())
