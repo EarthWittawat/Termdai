@@ -1,0 +1,9 @@
+-f https://download.pytorch.org/whl/torch_stable.html
+streamlit==1.10.0
+torch==1.8.1+cpu
+torchvision==0.9.1+cpu
+fastai>=2.3.1
+plotly>=5.7.0
+Pillow==9.1.0
+ipywidgets
+streamlit-audiorecorder
