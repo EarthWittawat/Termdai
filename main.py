@@ -63,7 +63,7 @@ with st.container():
                 # To play audio in frontend:
 
                 # To save audio to a file:
-                count = 1 + len(blobs_full)
+                count = len(blobs_full)
                 wav_file = open(
                     f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
                 wav_file.write(audio.tobytes())
