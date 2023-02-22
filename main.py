@@ -70,6 +70,7 @@ with st.container():
   
                 blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).mp3")
                 blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
+                st.success("บันทึกเสร็จสิ้น")
     if type == "กลวิธีขับร้อง":
         list_2 = st.selectbox("เลือกกลวิธีขับร้อง", [
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
@@ -91,3 +92,4 @@ with st.container():
   
                 blob = bucket.blob(f"audio/{type}/{list_2}/{list_2}({count}).mp3")
                 blob.upload_from_filename(f"./audio/{type}/{list_2}/{list_2}({count}).mp3")
+                st.success("บันทึกเสร็จสิ้น")
