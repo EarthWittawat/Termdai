@@ -31,12 +31,15 @@ with st.container():
     st.header("รายการชุดข้อมูลแบบฝึกเพลงไทยเดิม")
     type = st.selectbox("หัวข้อแบบฝึกหัด", ["การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
     path = "audio/" + type
+    ex1_list = ['เออ','อี']
+    ex2_list = ['การกลิ้งเสียง', 'การเกลือกเสียง']
     # if os.path.exists(path):
-    #     for audio in os.listdir(path):
-    #         st.write(audio)
-    blobs = bucket.list_blobs(prefix=os.path.join(path))
-    blobs = [file.name for file in blobs]
-    st.write(blobs)
+    if type == "การเปล่งเสียงกลุ่มคำ":
+        for audio in ex1_list:
+            st.write(audio)
+            blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
+            blobs = [file.name for file in blobs]
+            st.write(blobs)
     #         for ex in blobs:
     #             st.write(ex)
     #             audio_file = open(f"{path}/{audio}/{ex}", "rb")
