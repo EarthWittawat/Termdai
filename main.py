@@ -56,7 +56,7 @@ with st.container():
         path = f"./audio/{type}/{list_1}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
         blobs_full = [file.name for file in blobs]
-        st.write(blobs_full)
+        st.write(len(blobs_full))
         if st.button('ยืนยัน'):
             if len(audio) > 0:
                 # To play audio in frontend:
