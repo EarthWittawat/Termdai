@@ -70,7 +70,7 @@ with st.container():
                 f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
             wav_file.write(audio.tobytes())
             blob = client.blob(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
-            blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
+            blob.upload_from_filename(audio.tobytes())
     if type == "กลวิธีขับร้อง":
         list_1 = st.selectbox("เลือกกลวิธีขับร้อง", [
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
