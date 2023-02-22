@@ -53,6 +53,10 @@ with st.container():
     if type == "การเปล่งเสียงกลุ่มคำ":
         list_1 = st.selectbox("เลือกเสียง", ["เออ", "อี"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
+        path = f"./audio/{type}/{list_1}"
+        blobs = bucket.list_blobs(prefix=f"./audio/{type}/{list_1}/")
+        blobs_full = [file.name for file in blobs]
+        st.write(blobs_full)
         if st.button('ยืนยัน'):
             if len(audio) > 0:
                 # To play audio in frontend:
@@ -60,7 +64,6 @@ with st.container():
 
                 # To save audio to a file:
                 count = 1
-                path = f"./audio/{type}/{list_1}"
                 isExist = os.path.exists(path)
                 if not isExist:
                     os.makedirs(path)
@@ -69,23 +72,21 @@ with st.container():
                 wav_file = open(
                     f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
                 wav_file.write(audio.tobytes())
-                blobs = bucket.list_blobs(prefix=f"./audio/{type}/{list_1}/")
-                blobs_full = [file.name for file in blobs]
-                st.write(blobs_full)
+  
                 blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).mp3")
                 blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
     if type == "กลวิธีขับร้อง":
-        list_1 = st.selectbox("เลือกกลวิธีขับร้อง", [
+        list_2 = st.selectbox("เลือกกลวิธีขับร้อง", [
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
+        path = f"./audio/{type}/{list_2}"
         if st.button('ยืนยัน'):
             if len(audio) > 0:
             # To play audio in frontend:
                 st.audio(audio.tobytes())
-
                 # To save audio to a file:
                 count = 1
-                path = f"./audio/{type}/{list_1}"
+
                 isExist = os.path.exists(path)
                 if not isExist:
                     os.makedirs(path)
