@@ -54,40 +54,42 @@ with st.container():
     if type == "การเปล่งเสียงกลุ่มคำ":
         list_1 = st.selectbox("เลือกเสียง", ["เออ", "อี"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
-        if len(audio) > 0:
-            # To play audio in frontend:
-            st.audio(audio.tobytes())
+        if st.button('ยืนยัน'):
+            if len(audio) > 0:
+                # To play audio in frontend:
+                st.audio(audio.tobytes())
 
-            # To save audio to a file:
-            count = 1
-            path = f"./audio/{type}/{list_1}"
-            isExist = os.path.exists(path)
-            if not isExist:
-                os.makedirs(path)
-            for root_dir, cur_dir, files in os.walk(path):
-                count += len(files)
-            wav_file = open(
-                f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
-            wav_file.write(audio.tobytes())
-            bucket = client.bucket(bucket_name)
-            blob = bucket.blob(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
-            blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
+                # To save audio to a file:
+                count = 1
+                path = f"./audio/{type}/{list_1}"
+                isExist = os.path.exists(path)
+                if not isExist:
+                    os.makedirs(path)
+                for root_dir, cur_dir, files in os.walk(path):
+                    count += len(files)
+                wav_file = open(
+                    f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
+                wav_file.write(audio.tobytes())
+                bucket = client.bucket(bucket_name)
+                blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).mp3")
+                blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
     if type == "กลวิธีขับร้อง":
         list_1 = st.selectbox("เลือกกลวิธีขับร้อง", [
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
-        if len(audio) > 0:
+        if st.button('ยืนยัน'):
+            if len(audio) > 0:
             # To play audio in frontend:
-            st.audio(audio.tobytes())
+                st.audio(audio.tobytes())
 
-            # To save audio to a file:
-            count = 1
-            path = f"./audio/{type}/{list_1}"
-            isExist = os.path.exists(path)
-            if not isExist:
-                os.makedirs(path)
-            for root_dir, cur_dir, files in os.walk(path):
-                count += len(files)
-            wav_file = open(
-                f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
-            wav_file.write(audio.tobytes())
+                # To save audio to a file:
+                count = 1
+                path = f"./audio/{type}/{list_1}"
+                isExist = os.path.exists(path)
+                if not isExist:
+                    os.makedirs(path)
+                for root_dir, cur_dir, files in os.walk(path):
+                    count += len(files)
+                wav_file = open(
+                    f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
+                wav_file.write(audio.tobytes())
