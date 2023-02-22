@@ -45,9 +45,14 @@ with st.container():
         for audio in ex2_list:
             st.subheader(audio)
             blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
-            blobs = [file.name.replace(os.path.join(path,audio)+'/', '') for file in blobs]
-            for audio_list in blobs:
-                st.write(audio_list)        
+            blobs_full = [file.name for file in blobs]
+            blobs_cut = [file.name.replace(os.path.join(path,audio)+'/', '') for file in blobs]
+            for audio_list in blobs_full:
+                st.write(audio_list)
+                blob = bucket.blob(audio_list)
+                audio_file = open(blob,"rb")
+                audio_bytes = audio_file.read()
+                st.audio(audio_bytes, format="audio/mp3")        
     #         for ex in blobs:
     #             st.write(ex)
     #             audio_file = open(f"{path}/{audio}/{ex}", "rb")
