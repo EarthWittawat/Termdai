@@ -29,4 +29,5 @@ def list_cs_files(bucket_name):
     file_list = [file.name for file in file_list]
 
     return file_list
-st.write(list_cs_files(bucket_name))
+test = list_cs_files(bucket_name)
+st.write(test)
