@@ -23,11 +23,9 @@ content = read_file(bucket_name, file_path)
 
 # Print results.
 def list_cs_files(bucket_name): 
-    storage_client = storage.client()
 
-    file_list = storage_client.list_blobs(bucket_name)
+    file_list = client.list_blobs(bucket_name)
     file_list = [file.name for file in file_list]
 
     return file_list
-test = list_cs_files(bucket_name)
-st.write(test)
+st.write(list_cs_files(bucket_name))
