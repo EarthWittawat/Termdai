@@ -16,7 +16,7 @@ client = storage.Client(credentials=credentials)
 
 bucket_name = "termdai-bucket"
 file_path = "report.csv"
-
+bucket = client.bucket(bucket_name)
 st.set_page_config(
     page_title="Termdai",
     layout="wide",
@@ -69,7 +69,9 @@ with st.container():
                 wav_file = open(
                     f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
                 wav_file.write(audio.tobytes())
-                bucket = client.bucket(bucket_name)
+                blobs = bucket.list_blobs(prefix=f"./audio/{type}/{list_1}/")
+                blobs_full = [file.name for file in blobs]
+                st.write(blobs_full)
                 blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).mp3")
                 blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
     if type == "กลวิธีขับร้อง":
