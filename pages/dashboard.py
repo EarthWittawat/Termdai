@@ -36,14 +36,14 @@ with st.container():
     # if os.path.exists(path):
     if type == "การเปล่งเสียงกลุ่มคำ":
         for audio in ex1_list:
-            st.write(audio)
+            st.subheader(audio)
             blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
             blobs = [file.name.replace(os.path.join(path,audio)+'/', '') for file in blobs]
             for audio_list in blobs:
                 st.write(audio_list)   
     if type == "กลวิธีขับร้อง":
         for audio in ex2_list:
-            st.write(audio)
+            st.subheader(audio)
             blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
             blobs = [file.name.replace(os.path.join(path,audio)+'/', '') for file in blobs]
             for audio_list in blobs:
