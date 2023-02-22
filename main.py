@@ -35,8 +35,8 @@ with st.container():
     st.subheader("ข้อพึงปฎิบัติ*")
     
     st.write("1.เมื่อบันทึกเสียงเสร็จสิ้นให้ผู้บันทึกทำการตรวจไฟล์เสียงที่บันทึกที่หน้า Dashboard ก่อนทำการบันทึกในครั้งถัดไป")
-    st.write("2.หากไม่พบหน้า Dashboard ให้ทำการ Refresh / F5")
-    st.write("3.หากตรวจพบเจอ Bug & Error สามารถแจ้งได้ที่หน้า Report")
+    st.write("2.หากไม่พบหน้า 'ไฟล์เสียง' ให้ทำการ Refresh / F5")
+    st.write("3.หากตรวจพบเจอ Bug & Error สามารถแจ้งได้ที่หน้า'รายงานปัญหา'")
     st.write("")
     # data_check = f"./audio/"
     # count = {}
