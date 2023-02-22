@@ -30,7 +30,7 @@ with st.sidebar:
 with st.container():
     st.header("รายการชุดข้อมูลแบบฝึกเพลงไทยเดิม")
     type = st.selectbox("หัวข้อแบบฝึกหัด", ["การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
-    path = "./audio/" + type
+    path = "audio/" + type
     # if os.path.exists(path):
     #     for audio in os.listdir(path):
     #         st.write(audio)
