@@ -56,7 +56,7 @@ with st.container():
         path = f"./audio/{type}/{list_1}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
         blobs_full = [file.name for file in blobs]
-        st.write(f'ต้องการเสียง "{list_1}" อีก {100 - len(blobs_full)} เสียง')
+        st.write(f'ต้องการเสียง "{list_1}" อีก {101 - len(blobs_full)} เสียง')
         if len(audio) > 0:
             st.audio(audio.tobytes())
             if st.button('ยืนยัน'):
@@ -77,14 +77,14 @@ with st.container():
         path = f"./audio/{type}/{list_2}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_2}/")
         blobs_full = [file.name for file in blobs]
-        st.write(f'ต้องการเสียง "{list_2}" อีก {100 - len(blobs_full)} เสียง')
+        st.write(f'ต้องการเสียง "{list_2}" อีก {101 - len(blobs_full)} เสียง')
         if len(audio) > 0:
             st.audio(audio.tobytes())
             if st.button('ยืนยัน'):
             # To play audio in frontend:
 
                 # To save audio to a file:
-                count = 1 + len(blobs_full)
+                count = len(blobs_full)
                 wav_file = open(
                     f"./audio/{type}/{list_2}/{list_2}({count}).mp3", "wb")
                 wav_file.write(audio.tobytes())
