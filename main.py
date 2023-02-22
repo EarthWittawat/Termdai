@@ -36,18 +36,18 @@ with st.container():
     st.write("1.เมื่อบันทึกเสียงเสร็จสิ้นให้ผู้บันทึกทำการตรวจไฟล์เสียงที่บันทึกที่หน้า Dashboard ก่อนทำการบันทึกในครั้งถัดไป")
     st.write("2.หากตรวจพบเจอ Bug & Error สามารถแจ้งได้ที่หน้า Report")
     st.write("")
-    data_check = f"./audio/"
-    count = {}
-    for audio in os.listdir(data_check):
-        st.subheader(audio)
-        for audio_ex in os.listdir(os.path.join(data_check, audio)):
-            for root_dir, cur_dir, files in os.walk(
-                os.path.join(data_check, audio, audio_ex)
-            ):
-                count[audio_ex] = len(files)
-                st.write(
-                    f'ต้องการเสียง "{audio_ex}" อีก {100 - len(files)} เสียง')
-    st.write("")
+    # data_check = f"./audio/"
+    # count = {}
+    # for audio in os.listdir(data_check):
+    #     st.subheader(audio)
+    #     for audio_ex in os.listdir(os.path.join(data_check, audio)):
+    #         for root_dir, cur_dir, files in os.walk(
+    #             os.path.join(data_check, audio, audio_ex)
+    #         ):
+    #             count[audio_ex] = len(files)
+    #             st.write(
+    #                 f'ต้องการเสียง "{audio_ex}" อีก {100 - len(files)} เสียง')
+    # st.write("")
     type = st.selectbox("หัวข้อแบบฝึกหัด", [
                         "การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
     if type == "การเปล่งเสียงกลุ่มคำ":
@@ -56,19 +56,14 @@ with st.container():
         path = f"./audio/{type}/{list_1}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
         blobs_full = [file.name for file in blobs]
-        st.write(len(blobs_full))
+        st.write(f'ต้องการเสียง "{list_1}" อีก {100 - len(len(blobs_full))} เสียง')
         if st.button('ยืนยัน'):
             if len(audio) > 0:
                 # To play audio in frontend:
                 st.audio(audio.tobytes())
 
                 # To save audio to a file:
-                count = 1
-                isExist = os.path.exists(path)
-                if not isExist:
-                    os.makedirs(path)
-                for root_dir, cur_dir, files in os.walk(path):
-                    count += len(files)
+                count = 1 + len(blobs_full)
                 wav_file = open(
                     f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
                 wav_file.write(audio.tobytes())
@@ -80,18 +75,19 @@ with st.container():
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
         path = f"./audio/{type}/{list_2}"
+        blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_2}/")
+        blobs_full = [file.name for file in blobs]
+        st.write(f'ต้องการเสียง "{list_2}" อีก {100 - len(len(blobs_full))} เสียง')
         if st.button('ยืนยัน'):
             if len(audio) > 0:
             # To play audio in frontend:
                 st.audio(audio.tobytes())
-                # To save audio to a file:
-                count = 1
 
-                isExist = os.path.exists(path)
-                if not isExist:
-                    os.makedirs(path)
-                for root_dir, cur_dir, files in os.walk(path):
-                    count += len(files)
+                # To save audio to a file:
+                count = 1 + len(blobs_full)
                 wav_file = open(
-                    f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
+                    f"./audio/{type}/{list_2}/{list_2}({count}).mp3", "wb")
                 wav_file.write(audio.tobytes())
+  
+                blob = bucket.blob(f"audio/{type}/{list_2}/{list_2}({count}).mp3")
+                blob.upload_from_filename(f"./audio/{type}/{list_2}/{list_2}({count}).mp3")
