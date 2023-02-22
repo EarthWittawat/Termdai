@@ -45,7 +45,7 @@ with st.container():
             st.write(audio)
             blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
             blobs = [file.name for file in blobs]
-            blobs.replace('os.path.join(path,audio)', '')
+            blobs.replace(os.path.join(path,audio), '')
             st.write(blobs)        
     #         for ex in blobs:
     #             st.write(ex)
