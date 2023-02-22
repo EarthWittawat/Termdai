@@ -31,16 +31,16 @@ with st.container():
     st.header("รายการชุดข้อมูลแบบฝึกเพลงไทยเดิม")
     type = st.selectbox("หัวข้อแบบฝึกหัด", ["การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
     path = "./audio/" + type
-    if os.path.exists(path):
-        for audio in os.listdir(path):
-            st.write(audio)
-            blobs = bucket.list_blobs(prefix=os.path.join(path, audio))
-            st.write(blobs)
-            for ex in blobs:
-                st.write(ex)
-                # audio_file = open(f"{path}/{audio}/{ex}", "rb")
-                # audio_bytes = audio_file.read()
+    # if os.path.exists(path):
+    #     for audio in os.listdir(path):
+    #         st.write(audio)
+    blobs = bucket.list_blobs(prefix=os.path.join(path))
+    st.write(blobs)
+    #         for ex in blobs:
+    #             st.write(ex)
+    #             audio_file = open(f"{path}/{audio}/{ex}", "rb")
+    #             audio_bytes = audio_file.read()
 
-                # st.audio(audio_bytes, format="audio/mp3")
-    else:
-        st.write("no data")
+    #             st.audio(audio_bytes, format="audio/mp3")
+    # else:
+    #     st.write("no data")
