@@ -50,9 +50,8 @@ with st.container():
             for audio_list in blobs_full:
                 st.write(audio_list)
                 blob = bucket.blob(audio_list)
-                audio_file = open(blob,"rb")
-                audio_bytes = audio_file.read()
-                st.audio(audio_bytes, format="audio/mp3")        
+                with blob.open("r") as f:
+                    st.audio(f.read(), format="audio/mp3")        
     #         for ex in blobs:
     #             st.write(ex)
     #             audio_file = open(f"{path}/{audio}/{ex}", "rb")
