@@ -50,7 +50,7 @@ with st.container():
             st.subheader(audio)
             blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
             blobs_full = [file.name for file in blobs]
-            # blobs_cut = [file.name.replace(os.path.join(path,audio)+'/', '') for file in blobs]
+            blobs_cut = [file.replace(os.path.join(path,audio)+'/', '') for file in blobs_full]
             for audio_list , audio_file in zip(blobs_cut, blobs_full):
                 st.write(audio_list)
                 blob = bucket.blob(audio_file)
