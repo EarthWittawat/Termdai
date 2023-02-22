@@ -22,6 +22,11 @@ file_path = "report.csv"
 content = read_file(bucket_name, file_path)
 
 # Print results.
-for line in content.strip().split("\n"):
-    report, สถานะ = line.split(",")
-    st.write(f"{report} has a :{สถานะ}:")
+def list_cs_files(bucket_name): 
+    storage_client = storage.Client()
+
+    file_list = storage_client.list_blobs(bucket_name)
+    file_list = [file.name for file in file_list]
+
+    return file_list
+st.write(list_cs_files)
