@@ -5,7 +5,17 @@ from pathlib import Path
 import pathlib
 import os
 import os.path
+from google.oauth2 import service_account
+from google.cloud import storage
 
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+client = storage.Client(credentials=credentials)
+
+bucket_name = "termdai-bucket"
+bucket = client.bucket(bucket_name)
 st.set_page_config(
     page_title="Termdai",
     layout="wide",
@@ -24,11 +34,12 @@ with st.container():
     if os.path.exists(path):
         for audio in os.listdir(path):
             st.write(audio)
-            for ex in os.listdir(os.path.join(path, audio)):
+            blobs = bucket.list_blobs(prefix=os.path.join(path, audio))
+            for ex in blobs:
                 st.write(ex)
-                audio_file = open(f"{path}/{audio}/{ex}", "rb")
-                audio_bytes = audio_file.read()
+                # audio_file = open(f"{path}/{audio}/{ex}", "rb")
+                # audio_bytes = audio_file.read()
 
-                st.audio(audio_bytes, format="audio/mp3")
+                # st.audio(audio_bytes, format="audio/mp3")
     else:
         st.write("no data")
