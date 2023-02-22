@@ -54,7 +54,7 @@ with st.container():
         list_1 = st.selectbox("เลือกเสียง", ["เออ", "อี"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
         path = f"./audio/{type}/{list_1}"
-        blobs = bucket.list_blobs(prefix=f"./audio/{type}/{list_1}/")
+        blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
         blobs_full = [file.name for file in blobs]
         st.write(blobs_full)
         if st.button('ยืนยัน'):
