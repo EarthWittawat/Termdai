@@ -5,6 +5,18 @@ from pathlib import Path
 import pathlib
 import os
 import os.path
+import streamlit as st
+from google.oauth2 import service_account
+from google.cloud import storage
+
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+client = storage.Client(credentials=credentials)
+
+bucket_name = "termdai-bucket"
+file_path = "report.csv"
 
 st.set_page_config(
     page_title="Termdai",
@@ -57,6 +69,8 @@ with st.container():
             wav_file = open(
                 f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
             wav_file.write(audio.tobytes())
+            blob = client.blob(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
+            blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
     if type == "กลวิธีขับร้อง":
         list_1 = st.selectbox("เลือกกลวิธีขับร้อง", [
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
