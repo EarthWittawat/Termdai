@@ -26,7 +26,7 @@ with st.container():
         "แจ้งปัญหา 👇",
     )
     if st.button('ยืนยัน'):
-        st.success('ดำเนินการเสร็จสิ้น', icon="✅")
+        st.success('ดำเนินการเสร็จสิ้น')
         with open('report.csv', 'w', encoding='UTF8') as f:
             writer = csv.writer(f)
 
