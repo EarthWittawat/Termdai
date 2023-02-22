@@ -7,3 +7,4 @@ plotly>=5.7.0
 Pillow==9.1.0
 ipywidgets
 streamlit-audiorecorder
+google-cloud-storage
