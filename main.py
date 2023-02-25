@@ -67,11 +67,11 @@ with st.container():
                 # To save audio to a file:
                 count = len(blobs_full)
                 wav_file = open(
-                    f"./audio/{type}/{list_1}/{list_1}({count}).mp3", "wb")
+                    f"./audio/{type}/{list_1}/{list_1}({count}).wav", "wb")
                 wav_file.write(audio.tobytes())
   
-                blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).mp3")
-                blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).mp3")
+                blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).wav")
+                blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).wav")
                 st.success("บันทึกเสร็จสิ้น")
     if type == "กลวิธีขับร้อง":
         list_2 = st.selectbox("เลือกกลวิธีขับร้อง", [
@@ -89,9 +89,9 @@ with st.container():
                 # To save audio to a file:
                 count = len(blobs_full)
                 wav_file = open(
-                    f"./audio/{type}/{list_2}/{list_2}({count}).mp3", "wb")
+                    f"./audio/{type}/{list_2}/{list_2}({count}).wav", "wb")
                 wav_file.write(audio.tobytes())
   
-                blob = bucket.blob(f"audio/{type}/{list_2}/{list_2}({count}).mp3")
-                blob.upload_from_filename(f"./audio/{type}/{list_2}/{list_2}({count}).mp3")
+                blob = bucket.blob(f"audio/{type}/{list_2}/{list_2}({count}).wav")
+                blob.upload_from_filename(f"./audio/{type}/{list_2}/{list_2}({count}).wav")
                 st.success("บันทึกเสร็จสิ้น")

@@ -44,7 +44,7 @@ with st.container():
                 st.write(audio_list)
                 blob = bucket.blob(audio_file)
                 with blob.open("rb") as f:
-                    st.audio(f.read(), format="audio/mp3")      
+                    st.audio(f.read(), format="audio/wav")      
     if type == "กลวิธีขับร้อง":
         for audio in ex2_list:
             st.subheader(audio)
@@ -55,12 +55,12 @@ with st.container():
                 st.write(audio_list)
                 blob = bucket.blob(audio_file)
                 with blob.open("rb") as f:
-                    st.audio(f.read(), format="audio/mp3")        
+                    st.audio(f.read(), format="audio/wav")        
     #         for ex in blobs:
     #             st.write(ex)
     #             audio_file = open(f"{path}/{audio}/{ex}", "rb")
     #             audio_bytes = audio_file.read()
 
-    #             st.audio(audio_bytes, format="audio/mp3")
+    #             st.audio(audio_bytes, format="audio/wav")
     # else:
     #     st.write("no data")
