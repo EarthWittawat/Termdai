@@ -66,8 +66,7 @@ with st.container():
 
                 # To save audio to a file:
                 count = len(blobs_full)
-                wav_file = open(
-                    f"./audio/{type}/{list_1}/{list_1}({count}).wav", "wb")
+                wav_file = open(f"./audio/{type}/{list_1}/{list_1}({count}).wav", "wb")
                 wav_file.write(audio.tobytes())
   
                 blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).wav")
@@ -88,8 +87,7 @@ with st.container():
 
                 # To save audio to a file:
                 count = len(blobs_full)
-                wav_file = open(
-                    f"./audio/{type}/{list_2}/{list_2}({count}).wav", "wb")
+                wav_file = open(f"./audio/{type}/{list_2}/{list_2}({count}).wav", "wb")
                 wav_file.write(audio.tobytes())
   
                 blob = bucket.blob(f"audio/{type}/{list_2}/{list_2}({count}).wav")
