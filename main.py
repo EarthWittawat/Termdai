@@ -53,7 +53,7 @@ with st.container():
     type = st.selectbox("หัวข้อแบบฝึกหัด", [
                         "การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
     if type == "การเปล่งเสียงกลุ่มคำ":
-        list_1 = st.selectbox("เลือกเสียง", ["เออ", "อี"])
+        list_1 = st.selectbox("เลือกเสียง", ['เออ','อี','เอย','อือ','เอ๋ย'])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
         path = f"./audio/{type}/{list_1}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
