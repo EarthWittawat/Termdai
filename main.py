@@ -55,7 +55,7 @@ with st.container():
     if type == "การเปล่งเสียงกลุ่มคำ":
         list_1 = st.selectbox("เลือกเสียง", ['เออ','อี','เอย','เอ๋ย'])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
-        path = f"audio/{type}/{list_1}"
+        path = f"./audio/{type}/{list_1}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
         blobs_full = [file.name for file in blobs]
         st.subheader(f'ต้องการเสียง "{list_1}" อีก {101 - len(blobs_full)} เสียง')
@@ -66,14 +66,18 @@ with st.container():
 
                 # To save audio to a file:
                 count = len(blobs_full)
+                wav_file = open(
+                    f"./audio/{type}/{list_1}/{list_1}({count}).wav", "wb")
+                wav_file.write(audio.tobytes())
+  
                 blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).wav")
-                blob.upload_from_filename(f"audio/{type}/{list_1}/{list_1}({count}).wav")
+                blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).wav")
                 st.success("บันทึกเสร็จสิ้น")
     if type == "กลวิธีขับร้อง":
         list_2 = st.selectbox("เลือกกลวิธีขับร้อง", [
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
-        path = f"audio/{type}/{list_2}"
+        path = f"./audio/{type}/{list_2}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_2}/")
         blobs_full = [file.name for file in blobs]
         st.subheader(f'ต้องการเสียง "{list_2}" อีก {101 - len(blobs_full)} เสียง')
@@ -84,7 +88,10 @@ with st.container():
 
                 # To save audio to a file:
                 count = len(blobs_full)
+                wav_file = open(
+                    f"./audio/{type}/{list_2}/{list_2}({count}).wav", "wb")
+                wav_file.write(audio.tobytes())
   
                 blob = bucket.blob(f"audio/{type}/{list_2}/{list_2}({count}).wav")
-                blob.upload_from_filename(f"audio/{type}/{list_2}/{list_2}({count}).wav")
+                blob.upload_from_filename(f"./audio/{type}/{list_2}/{list_2}({count}).wav")
                 st.success("บันทึกเสร็จสิ้น")
