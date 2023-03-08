@@ -10,3 +10,5 @@ streamlit-audiorecorder
 google-cloud-storage
 simpleaudio
 numpy
+fastbook
+librosa
