@@ -10,4 +10,3 @@ streamlit-audiorecorder
 google-cloud-storage
 simpleaudio
 numpy
-librosa
