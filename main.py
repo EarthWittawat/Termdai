@@ -51,28 +51,28 @@ with st.container():
     #                 f'ต้องการเสียง "{audio_ex}" อีก {100 - len(files)} เสียง')
     # st.write("")
     type = st.selectbox("หัวข้อแบบฝึกหัด", [
-                        "การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
-    if type == "การเปล่งเสียงกลุ่มคำ":
-        list_1 = st.selectbox("เลือกเสียง", ['เออ','อี','เอย','เอ๋ย'])
-        audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
-        path = f"./audio/{type}/{list_1}"
-        blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
-        blobs_full = [file.name for file in blobs]
-        st.subheader(f'ต้องการเสียง "{list_1}" อีก {201 - len(blobs_full)} เสียง')
-        if len(audio) > 0:
-            st.audio(audio.tobytes())
-            if st.button('ยืนยัน'):
-                # To play audio in frontend:
+                        "การเปล่งเสียงกลุ่มคำ (กำลังแก้ไข)", "กลวิธีขับร้อง"])
+    # if type == "การเปล่งเสียงกลุ่มคำ":
+    #     list_1 = st.selectbox("เลือกเสียง", ['เออ','อี','เอย','เอ๋ย'])
+    #     audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
+    #     path = f"./audio/{type}/{list_1}"
+    #     blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_1}/")
+    #     blobs_full = [file.name for file in blobs]
+    #     st.subheader(f'ต้องการเสียง "{list_1}" อีก {201 - len(blobs_full)} เสียง')
+    #     if len(audio) > 0:
+    #         st.audio(audio.tobytes())
+    #         if st.button('ยืนยัน'):
+    #             # To play audio in frontend:
 
-                # To save audio to a file:
-                count = len(blobs_full)
-                wav_file = open(
-                    f"./audio/{type}/{list_1}/{list_1}({count}).wav", "wb")
-                wav_file.write(audio.tobytes())
+    #             # To save audio to a file:
+    #             count = len(blobs_full)
+    #             wav_file = open(
+    #                 f"./audio/{type}/{list_1}/{list_1}({count}).wav", "wb")
+    #             wav_file.write(audio.tobytes())
   
-                blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).wav")
-                blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).wav")
-                st.success("บันทึกเสร็จสิ้น")
+    #             blob = bucket.blob(f"audio/{type}/{list_1}/{list_1}({count}).wav")
+    #             blob.upload_from_filename(f"./audio/{type}/{list_1}/{list_1}({count}).wav")
+    #             st.success("บันทึกเสร็จสิ้น")
     if type == "กลวิธีขับร้อง":
         list_2 = st.selectbox("เลือกกลวิธีขับร้อง", [
                               "การกลิ้งเสียง", "การเกลือกเสียง"])
