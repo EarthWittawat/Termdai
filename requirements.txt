@@ -8,5 +8,3 @@ Pillow==9.1.0
 ipywidgets
 streamlit-audiorecorder
 google-cloud-storage
-simpleaudio
-numpy
