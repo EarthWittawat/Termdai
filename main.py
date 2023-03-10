@@ -75,7 +75,7 @@ with st.container():
     #             st.success("บันทึกเสร็จสิ้น")
     if type == "กลวิธีขับร้อง":
         list_2 = st.selectbox("เลือกกลวิธีขับร้อง", [
-                              "การกลิ้งเสียง", "การเกลือกเสียง"])
+                              "การครั่นเสียง ", "การกระทบเสียง", "เอื้อน 3 เสียง", "หางเสียง", "เอื้อนลมยาว "])
         audio = audiorecorder("Click to record", "กำลังบันทึกเสียง")
         path = f"./audio/{type}/{list_2}"
         blobs = bucket.list_blobs(prefix=f"audio/{type}/{list_2}/")

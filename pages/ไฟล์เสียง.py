@@ -31,20 +31,21 @@ with st.container():
     st.header("รายการชุดข้อมูลแบบฝึกเพลงไทยเดิม")
     type = st.selectbox("หัวข้อแบบฝึกหัด", ["การเปล่งเสียงกลุ่มคำ", "กลวิธีขับร้อง"])
     path = "audio/" + type
-    ex1_list = ['เออ','อี','เอย','เอ๋ย']
-    ex2_list = ['การกลิ้งเสียง', 'การเกลือกเสียง']
+    # ex1_list = ['เออ','อี','เอย','เอ๋ย']
+    ex2_list = [
+                              "การครั่นเสียง ", "การกระทบเสียง", "เอื้อน 3 เสียง", "หางเสียง", "เอื้อนลมยาว "]
     # if os.path.exists(path):
-    if type == "การเปล่งเสียงกลุ่มคำ":
-        for audio in ex1_list:
-            st.subheader(audio)
-            blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
-            blobs_full = [file.name for file in blobs]
-            blobs_cut = [file.replace(os.path.join(path,audio)+'/', '') for file in blobs_full]
-            for audio_list , audio_file in zip(blobs_cut, blobs_full):
-                st.write(audio_list)
-                blob = bucket.blob(audio_file)
-                with blob.open("rb") as f:
-                    st.audio(f.read(), format="audio/wav")      
+    # if type == "การเปล่งเสียงกลุ่มคำ":
+    #     for audio in ex1_list:
+    #         st.subheader(audio)
+    #         blobs = bucket.list_blobs(prefix=os.path.join(path,audio))
+    #         blobs_full = [file.name for file in blobs]
+    #         blobs_cut = [file.replace(os.path.join(path,audio)+'/', '') for file in blobs_full]
+    #         for audio_list , audio_file in zip(blobs_cut, blobs_full):
+    #             st.write(audio_list)
+    #             blob = bucket.blob(audio_file)
+    #             with blob.open("rb") as f:
+    #                 st.audio(f.read(), format="audio/wav")      
     if type == "กลวิธีขับร้อง":
         for audio in ex2_list:
             st.subheader(audio)
