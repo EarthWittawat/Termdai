@@ -16,7 +16,8 @@ client = storage.Client(credentials=credentials)
 
 bucket_name = "termdai-bucket"
 bucket = client.bucket(bucket_name)
-path = f"/audio/ขับร้องเพลงไทยเดิม/"
+
+path = "/audio/ขับร้องเพลงไทยเดิม/"
 
 with st.container():
     file = st.select_slider(
