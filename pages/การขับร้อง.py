@@ -7,7 +7,7 @@ import os
 import os.path
 from google.oauth2 import service_account
 from google.cloud import storage
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
@@ -20,9 +20,10 @@ bucket = client.bucket(bucket_name)
 
 
 with st.container():
-    with col2:
+    with col1:
         st.subheader('ฝึกขับร้องเพลงไทยเดิม')
         st.markdown("***")
+    
     file = st.select_slider(
         'เลือกท่อนที่ต้องการฝึกร้อง',
         options=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'])
@@ -31,6 +32,6 @@ with st.container():
     blob = bucket.blob(path)
     with blob.open("rb") as f:
         st.audio(f.read(), format="audio/wav")   
-    # audio_bytes = audio_file.read()
-
-    # st.audio(audio_bytes, format='audio/wav')
+    option = st.selectbox(
+    'เลือกเพลงที่ต้องการฝึก',
+    ('ต้นเพลงฉิ่ง 3 ชั้น', 'แขกวรเทศ'))
