@@ -18,7 +18,7 @@ bucket_name = "termdai-bucket"
 bucket = client.bucket(bucket_name)
 path = f"./audio/ขับร้องเพลงไทยเดิม/"
 
-with st.container:
+with st.container():
     file = st.select_slider(
         'Select a color of the rainbow',
         options=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'])
