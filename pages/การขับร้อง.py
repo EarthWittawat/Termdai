@@ -25,6 +25,7 @@ with st.container():
     # audio_file = open('../audio/ขับร้องเพลงไทยเดิม/'+ color +'.wav', 'rb')
     blobs = bucket.list_blobs(prefix=os.path.join(path,file))
     blobs_full = [file.name for file in blobs]
+    st.write(blobs_full , blobs)
     blobs_cut = [file.replace(os.path.join(path,file)+'/', '') for file in blobs_full]
     for audio_list , audio_file in zip(blobs_cut, blobs_full):
         st.write(audio_list)
