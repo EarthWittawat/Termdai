@@ -21,11 +21,10 @@ bucket = client.bucket(bucket_name)
 
 with st.container():
     file = st.select_slider(
-        'Select a color of the rainbow',
+        'เลือกท่อนที่ต้องการฝึกร้อง',
         options=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'])
     # audio_file = open('../audio/ขับร้องเพลงไทยเดิม/'+ color +'.wav', 'rb')
     path = "audio/ขับร้องเพลงไทยเดิม/" + file + '.wav'
-    st.write(path)
     blob = bucket.blob(path)
     with blob.open("rb") as f:
         st.audio(f.read(), format="audio/wav")   
