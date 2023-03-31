@@ -17,16 +17,17 @@ client = storage.Client(credentials=credentials)
 bucket_name = "termdai-bucket"
 bucket = client.bucket(bucket_name)
 
-path = "/audio/ขับร้องเพลงไทยเดิม/"
+
 
 with st.container():
     file = st.select_slider(
         'Select a color of the rainbow',
         options=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'])
     # audio_file = open('../audio/ขับร้องเพลงไทยเดิม/'+ color +'.wav', 'rb')
+    path = "/audio/ขับร้องเพลงไทยเดิม/"
     blobs = bucket.list_blobs(prefix=os.path.join(path))
     blobs_full = [file.name for file in blobs]
-    st.write(blobs_full , blobs)
+    st.write(blobs_full)
     blobs_cut = [file.replace(os.path.join(path,file)+'/', '') for file in blobs_full]
     for audio_list , audio_file in zip(blobs_cut, blobs_full):
         st.write(audio_list)
