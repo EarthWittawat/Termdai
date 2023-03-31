@@ -22,9 +22,9 @@ bucket = client.bucket(bucket_name)
 with st.container():
     with col2:
         st.subheader('ฝึกขับร้องเพลงไทยเดิม')
-        st.write()
-        st.write()
-        st.write()
+        st.write(" ")
+        st.write(" ")
+        st.write(" ")
     file = st.select_slider(
         'เลือกท่อนที่ต้องการฝึกร้อง',
         options=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'])
