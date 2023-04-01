@@ -77,7 +77,7 @@ def classification(dataframe):
     X = scaler.fit_transform(np.array(df.iloc[:, 1:27]))
     X_test = scaler.transform(np.array(dataframe.iloc[:, 1:27]))
     # load the pretrained model
-    model = load_model('https://www.dropbox.com/s/vm1h813lvwpmwjd/model.pth?dl=0')
+    model = torch.load('https://www.dropbox.com/s/vm1h813lvwpmwjd/model.pth?dl=0')
     # generate predictions for test samples
     predictions = model.predict(X_test)
     # generate argmax for predictions
@@ -85,21 +85,58 @@ def classification(dataframe):
     # transform class number into class name
     result = converter.inverse_transform(classes)
     return result
-
-with st.container():
-    with col1:
-        st.subheader('ฝึกขับร้องเพลงไทยเดิม')
+def choice_prediction():
+    st.write('# Prediction')
+    st.write('### Choose a marine mammal sound file in .wav format')
+    # upload sound
+    uploaded_file = st.file_uploader(' ', type='wav')
+    if uploaded_file is not None:  
+        # view details
+        file_details = {'filename':uploaded_file.name, 'filetype':uploaded_file.type, 'filesize':uploaded_file.size}
+        st.write(file_details)
+        # read and play the audio file
+        st.write('### Play audio')
+        audio_bytes = uploaded_file.read()
+        st.audio(audio_bytes, format='audio/wav')
+        # save_file function
+        save_file(uploaded_file)
+        # define the filename
+        sound = uploaded_file.name
+        # transform_wav_to_csv function
+        transform_wav_to_csv(sound)
+        st.write('### Classification results')
+        # if you select the predict button
+        if st.button('Predict'):
+            # write the prediction: the prediction of the last sound sent corresponds to the first column
+            st.write("The marine mammal is: ",  str(classification(transform_wav_to_csv(sound))).replace('[', '').replace(']', '').replace("'", '').replace('"', ''))
+    else:
+        st.write('The file has not been uploaded yet')
+    return
+if __name__ == '__main__':
+    st.write('___')
+    # create a sidebar
+    st.sidebar.title('Marine mammal sounds classification')
+    select = st.sidebar.selectbox('', ['Marine mammals', 'Prediction'], key='1')
+    st.sidebar.write(select)
+    # if sidebar selection is "Prediction"
+    if select=='Prediction':
+        # choice_prediction function
+        choice_prediction()
+    # else: stay on the home page
+    with st.container():
+        with col1:
+            st.subheader('ฝึกขับร้องเพลงไทยเดิม')
+            st.markdown("***")
+        option = st.selectbox(
+        'เลือกเพลงที่ต้องการฝึก',
+        ('ต้นเพลงฉิ่ง 3 ชั้น', 'แขกวรเทศ'))
+        file = st.select_slider(
+            'เลือกท่อนที่ต้องการฝึกร้อง',
+            options=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'])
+        
+        # audio_file = open('../audio/ขับร้องเพลงไทยเดิม/'+ color +'.wav', 'rb')
+        path = "audio/ขับร้องเพลงไทยเดิม/" + file + '.wav'
+        blob = bucket.blob(path)
+        with blob.open("rb") as f:
+            st.audio(f.read(), format="audio/wav")   
         st.markdown("***")
-    option = st.selectbox(
-    'เลือกเพลงที่ต้องการฝึก',
-    ('ต้นเพลงฉิ่ง 3 ชั้น', 'แขกวรเทศ'))
-    file = st.select_slider(
-        'เลือกท่อนที่ต้องการฝึกร้อง',
-        options=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'])
-    
-    # audio_file = open('../audio/ขับร้องเพลงไทยเดิม/'+ color +'.wav', 'rb')
-    path = "audio/ขับร้องเพลงไทยเดิม/" + file + '.wav'
-    blob = bucket.blob(path)
-    with blob.open("rb") as f:
-        st.audio(f.read(), format="audio/wav")   
-    st.markdown("***")
