@@ -111,7 +111,7 @@ def choice_prediction():
             st.write("The marine mammal is: ",  str(classification(transform_wav_to_csv(sound))).replace('[', '').replace(']', '').replace("'", '').replace('"', ''))
     else:
         st.write('The file has not been uploaded yet')
-    return
+
 if __name__ == '__main__':
     st.write('___')
     # create a sidebar
