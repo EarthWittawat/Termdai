@@ -27,8 +27,10 @@ bucket_name = "termdai-bucket"
 bucket = client.bucket(bucket_name)
 def save_file(sound_file):
     # save your sound file in the right folder by following the path
-    with open(os.path.join('./audio_files/', sound_file.name),'wb') as f:
-         f.write(sound_file.getbuffer())
+    st.write(sound_file.name)
+    with open(f'./audio_files/' + sound_file.name,'wb') as f:
+         
+         f.write(sound_file.tobytes())
     return sound_file.name
 def transform_wav_to_csv(sound_saved):
     # define the column names
